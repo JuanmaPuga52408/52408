@@ -1,0 +1,3 @@
+variable nombre = "ana";
+variable largo = longitud(nombre);
+imprimir(largo);
