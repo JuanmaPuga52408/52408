@@ -39,7 +39,7 @@ const tokenNames = [
 
 tokenStream.tokens.forEach(token => {
 
-    if(token.type !== antlr4.Token.EOF){
+    if (token.type !== antlr4.Token.EOF) {
 
         console.log(
             `${token.text} ---> ${tokenNames[token.type]}`
@@ -54,16 +54,17 @@ const parser = new CalculatorParser(tokenStream);
 const errorListener = new CustomErrorListener();
 
 parser.removeErrorListeners();
-
 parser.addErrorListener(errorListener);
 
 const tree = parser.program();
 
 console.log("\n===== ANALISIS SINTACTICO =====");
 
-if(errorListener.errors.length > 0){
+if (errorListener.errors.length > 0) {
 
-    errorListener.errors.forEach(e => console.log(e));
+    errorListener.errors.forEach(error => {
+        console.log(error);
+    });
 
     process.exit(1);
 
@@ -72,7 +73,6 @@ if(errorListener.errors.length > 0){
 console.log("Programa correcto.");
 
 console.log("\n===== ARBOL SINTACTICO =====");
-
 console.log(tree.toStringTree(parser.ruleNames));
 
 console.log("\n===== CODIGO GENERADO =====\n");
@@ -93,43 +93,43 @@ acciones.forEach(accion => {
 
         const texto = cmd.getText();
 
-        if(texto.includes("usarEscaneoProfundo")){
+        if (texto.includes("usarEscaneoProfundo")) {
 
             jsCode +=
-            `    console.log("Escaneo profundo activado");\n`;
+                `    console.log("Escaneo profundo activado");\n`;
 
         }
 
-        else if(texto.includes("moverArchivo")){
+        else if (texto.includes("moverArchivo")) {
 
             const ruta =
-                cmd.CADENA().getText().replace(/'/g,'');
+                cmd.CADENA().getText().replace(/'/g, '');
 
             jsCode +=
-            `    console.log("Moviendo archivo a ${ruta}");\n`;
+                `    console.log("Moviendo archivo a ${ruta}");\n`;
 
         }
 
-        else if(texto.includes("notificar")){
+        else if (texto.includes("notificar")) {
 
             const mensaje =
-                cmd.CADENA().getText().replace(/'/g,'');
+                cmd.CADENA().getText().replace(/'/g, '');
 
             jsCode +=
-            `    console.log("NOTIFICACION: ${mensaje}");\n`;
+                `    console.log("NOTIFICACION: ${mensaje}");\n`;
 
         }
 
-        else if(texto.includes("retornar")){
+        else if (texto.includes("retornar")) {
 
             jsCode +=
-            `    return "resultado";\n`;
+                `    return "resultado";\n`;
 
         }
 
     });
 
-    jsCode += `}\n`;
+    jsCode += `}\n\n`;
 
     jsCode += `${nombre}();\n\n`;
 

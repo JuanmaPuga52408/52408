@@ -1,0 +1,5 @@
+accion limpieza {
+    notificar 'Proceso iniciado'
+    moverArchivo a 'D:/archivos'
+    retornar resultado
+}

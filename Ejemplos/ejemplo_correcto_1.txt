@@ -1,0 +1,5 @@
+accion respaldo {
+    usarEscaneoProfundo
+    moverArchivo a 'C:/backup'
+    retornar resultado
+}
