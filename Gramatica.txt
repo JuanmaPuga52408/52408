@@ -1,0 +1,14 @@
+GRAMÁTICA DEL LENGUAJE
+
+<program> ::= <action>+
+
+<action> ::= "accion" IDENTIFICADOR "{" <comando>+ "}"
+
+<comando> ::= "moverArchivo" "a" CADENA
+            | "usarEscaneoProfundo"
+            | "retornar" "resultado"
+            | "notificar" CADENA
+
+IDENTIFICADOR ::= letra (letra | dígito)*
+
+CADENA ::= 'texto'
